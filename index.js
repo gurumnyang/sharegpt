@@ -47,11 +47,23 @@ app.post('/api/activity', (req, res) => {
   const responseDevices = activityLogs.filter(log => {
     return Date.now() - new Date(log.timestamp).getTime() <= TEN_MINUTES;
   });
-
   return res.status(200).json({
     status: 'success',
     devices: responseDevices
   });
+});
+
+app.post('/api/view', (req, res) => {
+  //그냥 로그만 보내드려라
+  // 오래된 로그 정리
+  cleanupLogs();
+
+  //보내드려라
+    return res.status(200).json({
+        status: 'success',
+        devices: activityLogs
+    });
+
 });
 
 // 존재하지 않는 엔드포인트 처리
