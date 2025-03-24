@@ -3,6 +3,13 @@ const app = express();
 const port = 4715;
 
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 
 let activityLogs = [];
 const TEN_MINUTES = 10 * 60 * 1000;
