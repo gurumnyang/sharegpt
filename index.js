@@ -1,8 +1,17 @@
 const express = require('express');
 const app = express();
 const port = 4715;
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 
 // ---------------------------------------------
 // 1) 기존 activityLogs 로직 (10분 내 사용여부)
